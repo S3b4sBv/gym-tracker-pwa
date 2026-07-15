@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Tracker</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+
+  <!-- App principal -->
+  <div class="app">
+
+    <!-- ============ PANTALLA: LOGIN ============ -->
+    <section id="screen-login" class="screen active">
+      <header class="topbar">
+        <h2>Gym Tracker</h2>
+      </header>
+      <div class="content">
+
+        <div class="card">
+          <label for="login-email">Correo</label>
+          <input type="email" id="login-email" placeholder="tu@correo.com">
+
+          <label for="login-password" style="margin-top:10px;">Contraseña</label>
+          <input type="password" id="login-password" placeholder="••••••••">
+
+          <p id="login-error" style="color:#e94560; font-size:12px; margin-top:8px;"></p>
+
+          <button class="btn-primary" id="btn-login">Iniciar sesión</button>
+          <button class="btn-secondary" id="btn-register">Crear cuenta</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PANTALLA: INICIO ============ -->
+<section id="screen-home" class="screen">
+  <header class="topbar">
+    <h2 id="home-greeting">Hola 💪</h2>
+  </header>
+  <div class="content">
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-sesiones">0</div>
+        <div class="stat-label">sesiones</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-semanas">0</div>
+        <div class="stat-label">semanas activo</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-racha" style="color:var(--accent2);">0</div>
+        <div class="stat-label">🔥 días seguidos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-peso-corporal" style="color:var(--accent3);">-</div>
+        <div class="stat-label">⚖️ peso corporal</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-duracion-ultima" style="color:var(--accent);">-</div>
+        <div class="stat-label">⏱️ última sesión</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-duracion-promedio" style="color:var(--accent);">-</div>
+        <div class="stat-label">📊 promedio</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Próxima sesión</div>
+      <div id="home-next-session">-</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Rutina semanal</div>
+      <div class="row">
+        <span class="badge badge-upper">UPPER</span>
+        <span>Lunes</span>
+      </div>
+      <div class="row">
+        <span class="badge badge-lower">LOWER</span>
+        <span>Martes</span>
+      </div>
+      <div class="row">
+        <span class="badge badge-push">PUSH</span>
+        <span>Miércoles</span>
+      </div>
+      <div class="row">
+        <span class="badge badge-pull">PULL</span>
+        <span>Jueves</span>
+      </div>
+      <div class="row">
+        <span class="badge badge-legs">LEGS</span>
+        <span>Viernes</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Última sesión</div>
+      <div id="home-last-session">
+        <p style="color:#666;">Sin sesiones aún</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Récords personales</div>
+      <div id="home-records">
+        <p style="color:#666;">Sin récords aún</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Músculos más entrenados (7 días)</div>
+      <div id="home-musculos">
+        <p style="color:#666;">Sin datos aún</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ============ PANTALLA: REGISTRAR ============ -->
+    <section id="screen-register" class="screen">
+      <header class="topbar">
+        <h2>Registrar sesión</h2>
+      </header>
+      <div class="content">
+
+        <div class="card">
+          <label for="reg-fecha">Fecha</label>
+          <input type="date" id="reg-fecha">
+
+          <label for="reg-sesion" style="margin-top:10px; display:block;">Sesión</label>
+          <select id="reg-sesion">
+            <option value="UPPER">UPPER - Lunes</option>
+            <option value="LOWER">LOWER - Martes</option>
+            <option value="PUSH">PUSH - Miércoles</option>
+            <option value="PULL">PULL - Jueves</option>
+            <option value="LEGS">LEGS - Viernes</option>
+          </select>
+        </div>
+
+        <div class="card" id="timer-card">
+      <div class="card-title">Temporizador de descanso</div>
+
+      <div id="timer-display">00:00</div>
+
+      <div class="timer-quick-buttons">
+        <button class="timer-btn" data-seconds="60">60s</button>
+        <button class="timer-btn" data-seconds="90">90s</button>
+        <button class="timer-btn" data-seconds="120">120s</button>
+        <button class="timer-btn" data-seconds="180">180s</button>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn-secondary" id="btn-timer-pause" style="display:none;">Pausar</button>
+        <button class="btn-secondary" id="btn-timer-reset" style="display:none;">Reiniciar</button>
+      </div>
+    </div>
+
+        <!-- Aquí JavaScript va a meter los ejercicios -->
+        <div id="reg-exercises-container"></div>
+
+        <button class="btn-primary" id="btn-save-session">Guardar sesión</button>
+
+      </div>
+    </section>
+
+    <!-- ============ PANTALLA: HISTORIAL ============ -->
+    <section id="screen-history" class="screen">
+      <header class="topbar">
+        <h2>Historial</h2>
+      </header>
+      <div class="content">
+
+        <div id="hist-list">
+          <p style="color:#666; text-align:center; padding:20px 0;">Cargando...</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PANTALLA: PROGRESO ============ -->
+<section id="screen-progress" class="screen">
+  <header class="topbar">
+    <h2>Progreso</h2>
+  </header>
+  <div class="content">
+
+    <div class="card">
+      <label for="prog-select">Ejercicio</label>
+      <select id="prog-select"></select>
+    </div>
+
+    <div class="card" id="prog-stats" style="display:none;">
+      <div class="stats-row" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="stat-card">
+          <div class="stat-value" id="prog-max" style="font-size:16px;">-</div>
+          <div class="stat-label">máx kg</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="prog-sessions" style="font-size:16px;">-</div>
+          <div class="stat-label">sesiones</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="prog-gain" style="font-size:16px; color:var(--accent3);">-</div>
+          <div class="stat-label">ganado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Evolución de carga (kg)</div>
+      <canvas id="prog-chart"></canvas>
+    </div>
+
+    <div id="prog-empty" style="display:none; text-align:center; color:#666; padding:20px 0;">
+      Aún no tienes datos para graficar
+    </div>
+
+  </div>
+</section>
+
+    <!-- ============ PANTALLA: HERRAMIENTAS ============ -->
+<section id="screen-tools" class="screen">
+  <header class="topbar">
+    <h2>Herramientas</h2>
+  </header>
+  <div class="content">
+
+    <!-- ===== CALCULADORA DE PROGRESIÓN ===== -->
+    <div class="card">
+      <div class="card-title">Calculadora de progresión</div>
+
+      <label for="calc-peso">Peso actual (kg)</label>
+      <input type="number" id="calc-peso" placeholder="60" step="2.5" min="0">
+
+      <label for="calc-inc" style="margin-top:10px;">Incremento (kg)</label>
+      <input type="number" id="calc-inc" placeholder="2.5" step="2.5" min="0" value="2.5">
+
+      <div class="row2" style="margin-top:10px;">
+        <div>
+          <label for="calc-series-obj">Series objetivo</label>
+          <input type="number" id="calc-series-obj" placeholder="4" min="1" value="4">
+        </div>
+        <div>
+          <label for="calc-reps-obj">Reps objetivo</label>
+          <input type="number" id="calc-reps-obj" placeholder="10" min="1" value="10">
+        </div>
+      </div>
+
+      <label for="calc-reps-min" style="margin-top:10px;">Reps logradas (mínimo entre series)</label>
+      <input type="number" id="calc-reps-min" placeholder="10" min="0">
+
+      <button class="btn-primary" id="btn-calc-progresion">Calcular</button>
+
+      <div id="calc-resultado" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- ===== CALCULADORA DE CALENTAMIENTO ===== -->
+    <div class="card">
+      <div class="card-title">Calculadora de calentamiento</div>
+
+      <div class="row2">
+        <div>
+          <label for="warm-peso">Peso de trabajo (kg)</label>
+          <input type="number" id="warm-peso" placeholder="100" step="2.5" min="0">
+        </div>
+        <div>
+          <label for="warm-barra">Peso de barra (kg)</label>
+          <input type="number" id="warm-barra" placeholder="20" step="2.5" min="0" value="20">
+        </div>
+      </div>
+
+      <div id="warm-resultado" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- ===== GUÍA RPE ===== -->
+    <div class="card">
+      <div class="card-title">Guía RPE (esfuerzo percibido)</div>
+      <div id="rpe-guide"></div>
+    </div>
+
+    <!-- ===== MEDIDAS CORPORALES ===== -->
+    <div class="card">
+      <div class="card-title">Medidas corporales</div>
+
+      <label for="med-fecha">Fecha</label>
+      <input type="date" id="med-fecha">
+
+      <div class="row2" style="margin-top:10px;">
+        <div>
+          <label for="med-peso">Peso (kg)</label>
+          <input type="number" id="med-peso" placeholder="70" step="0.1" min="0">
+        </div>
+        <div>
+          <label for="med-cintura">Cintura (cm)</label>
+          <input type="number" id="med-cintura" placeholder="80" step="0.5" min="0">
+        </div>
+      </div>
+
+      <div class="row2" style="margin-top:10px;">
+        <div>
+          <label for="med-pecho">Pecho (cm)</label>
+          <input type="number" id="med-pecho" placeholder="95" step="0.5" min="0">
+        </div>
+        <div>
+          <label for="med-brazo">Brazo (cm)</label>
+          <input type="number" id="med-brazo" placeholder="35" step="0.5" min="0">
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btn-save-medida">Guardar medidas</button>
+
+      <div id="med-historial" style="margin-top:12px;"></div>
+    </div>
+
+  </div>
+</section>
+
+  </div> <!-- cierra .app -->
+
+  <!-- ============ NAVEGACIÓN INFERIOR ============ -->
+  <nav class="navbar" id="main-navbar" style="display:none;">
+    <button class="nav-btn active" data-screen="home">Inicio</button>
+    <button class="nav-btn" data-screen="register">Registrar</button>
+    <button class="nav-btn" data-screen="history">Historial</button>
+    <button class="nav-btn" data-screen="progress">Progreso</button>
+    <button class="nav-btn" data-screen="tools">Tools</button>
+  </nav>
+
+  <!-- ============ MODAL: DETALLE DE SESIÓN ============ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div id="modal-body"></div>
+      <button class="btn-secondary" id="btn-close-modal">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (vía CDN, sin npm) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <!-- Configuración de Firebase (debe ir ANTES de app.js) -->
+  <script src="js/firebase-config.js"></script>
+
+  <!-- Chart.js (para gráficas) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script src="js/auth.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

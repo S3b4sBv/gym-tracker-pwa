@@ -1,0 +1,74 @@
+
+1.Temporizador de descanso
+
+Botones rápidos:
+
+60 s.
+90 s.
+120 s.
+180 s.
+
+Al terminar que vibre o notifique.
+
+
+2.Detección de récords
+
+Cuando superes una marca:
+
+ Nuevo récord personal
+Press banca: 85 kg x 5
+
+
+3.Dashboard principal
+
+Mostrar:
+
+Entreno de hoy.
+Último entrenamiento.
+Peso corporal.
+Días consecutivos.
+Próximo objetivo.
+
+4. Calendario de actividad
+
+Algo similar al calendario de contribuciones de GitHub.
+
+🟩🟩⬜🟩🟩🟩⬜
+🟩🟩🟩🟩⬜🟩🟩
+
+Visualmente ayuda bastante a mantener constancia.
+
+
+5.Duración de entrenamiento
+
+Registrar:
+
+Hora de inicio.
+Hora de fin.
+
+Y mostrar:
+
+Promedio por sesión.
+Tiempo semanal invertido.
+
+
+6.Músculos más entrenados
+
+Si cada ejercicio tiene grupos musculares asociados, puedes mostrar:
+
+Grupo	Series semanales
+Pecho	18
+Espalda	16
+Hombro	10
+Bíceps	8
+
+Eso ayuda a detectar desbalances.
+
+
+7.la aplicacion web debera detectar automaticamente el dia 
+
+
+
+8. 
+
+
